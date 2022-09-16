@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="google-site-verification" content="TZE0rZyIqLl10trYu3BWBWa1Vmz6HFwhb2OcNEK4u-s" />
+     <link rel="shortcut icon" href= /img/favicon.ico >
+    <title>
+        Dovey&#39;s Blog
+    </title>
+    <meta name="description" content= 嘿，我是dovey，这是一个简单的博客网站。欢迎访问！ >
+    <meta name="keywords" content= Blog,Hexo,Theme,note >
+    
+<link rel="stylesheet" href="/libs/highlight/styles/monokai-sublime.css">
+
+    
+<link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body id="bodyx">
+    <div class="hd posts">
+    <a href="/index.html"><i class="fa fa-home
+ replay-btn" aria-hidden="true"></i></a>
+    <div class="post-title">
+        <p>
+            rhce8
+        </p>
+        <hr>
+    </div>
+    <div class="post-content">
+        <p>环境下载咨询qq:1096485692</p>
+<h1 id="RHCE"><a href="#RHCE" class="headerlink" title="RHCE"></a>RHCE</h1><h2 id="重要配置信息"><a href="#重要配置信息" class="headerlink" title="重要配置信息"></a>重要配置信息</h2><p>在考试期间，除了您就坐位置的台式机之外，还将使用多个虚拟系统。您不具有台式机系统的</p>
+<p>root 访问权，但具有对虚拟系统的完整root 访问权。</p>
+<h2 id="系统信息"><a href="#系统信息" class="headerlink" title="系统信息"></a>系统信息</h2><p>在本考试期间，您将操作下列虚拟系统</p>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>IP地址</th>
+<th>Ansible角色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>control</td>
+<td>172.24.12.11</td>
+<td>ansible control node</td>
+</tr>
+<tr>
+<td>node1</td>
+<td>172.24.12.6</td>
+<td>ansible managed node</td>
+</tr>
+<tr>
+<td>node2</td>
+<td>172.24.12.7</td>
+<td>ansible managed node</td>
+</tr>
+<tr>
+<td>node3</td>
+<td>172.24.12.8</td>
+<td>ansible managed node</td>
+</tr>
+<tr>
+<td>node4</td>
+<td>172.24.12.9</td>
+<td>ansible managed node</td>
+</tr>
+<tr>
+<td>node5</td>
+<td>172.24.12.10</td>
+<td>ansible managed node</td>
+</tr>
+</tbody></table>
+<p>这些系统的 IP 地址采用静态设置。请勿更改这些设置。<br>主机名称解析已配置为解析上方列出的完全限定主机名，同时也解析主机短名称。</p>
+<h2 id="帐户信息"><a href="#帐户信息" class="headerlink" title="帐户信息"></a>帐户信息</h2><p>所有系统的 root 密码是redhat。<br>请勿更改 root 密码。除非另有指定，否则这将是用于访问其他系统和服务的密码。此外，除非另有指定，否则此密码也应用于您创建的所有帐户，或者任何需要设置密码的服务。<br>为方便起见，所有系统上已预装了 SSH 密钥，允许在不输入密码的前提下通过 SSH 进行 root 访问。请勿对系统上的 root SSH 配置文件进行任何修改。<br>Ansible 控制节点上已创建了用户帐户 curtis。此帐户预装了 SSH 密钥，允许在 Ansible 控制节点和各个 Ansible 受管节点之间进行 SSH 登录。请勿对系统上的 curtisSSH 配置文件进行任何修改。您可以从 root 帐户使用 su 访问此用户帐户。</p>
+<h2 id="重要信息"><a href="#重要信息" class="headerlink" title="重要信息"></a>重要信息</h2><p>除非另有指定，否则您的所有工作（包括 Ansible playbook、配置文件和主机清单等）应当保存在控制节点上的目录 &#x2F;home&#x2F;curtis&#x2F;ansible 中，并且应当归 curtis用户所有。所有 Ansible 相关的命令应当由 curtis用户从 Ansible 控制节点上的这个目录运行。</p>
+<h2 id="其他信息"><a href="#其他信息" class="headerlink" title="其他信息"></a>其他信息</h2><p>一些考试项目可能需要修改 Ansible 主机清单。您要负责确保所有以前的清单组和项目保留下来，与任何其他更改共存。您还要有确保清单中所有默认的组和主机保留您进行的任何更改。<br>考试系统上的防火墙默认为不启用，SELinux 则处于强制模式。<br>如果需要安装其他软件，您的物理系统和 Ansible 控制节点可能已设置为指向 content 上的下述存储库：<br><code>http://rhgls.area12.example.com/dvd/BaseOS http://rhgls.area12.example.com/dvd/AppStream</code><br>一些项目需要额外的文件，这些文件已在以下位置提供：<br><code>http://rhgls.area12.example.com/materials</code><br>产品文档可从以下位置找到：<br><code>http://rhgls.area12.example.com/materials/docs/ansible/html</code><br>其他资源也进行了配置，供您在考试期间使用。关于这些资源的具体信息将在需要这些资源的项目中提供。<br><strong>重要信息 请注意，在评分之前，您的 Ansible 受管节点系统将重置为考试开始时的初始状态，您编写的 Ansible playbook 将通过以 curtis用户身份从控制节点上的目录 &#x2F;home&#x2F;curtis&#x2F;ansible 目录运行来应用。在playbook 运行后，系统会对您的受管节点进行评估，以判断它们是否按照规定进行了配置。</strong></p>
+<h2 id="RH294"><a href="#RH294" class="headerlink" title="RH294"></a>RH294</h2><h3 id="安装和配置Ansible"><a href="#安装和配置Ansible" class="headerlink" title="安装和配置Ansible"></a>安装和配置Ansible</h3><ol>
+<li>按照下方所述，在控制节点 control上安装和配置Ansible：</li>
+</ol>
+<ul>
+<li>安装所需的软件包</li>
+<li>创建名为&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;inventory的静态清单文件，以满足以下要求：<ul>
+<li>node1是dev 主机组的成员</li>
+<li>node2是test 主机组的成员</li>
+<li>node3 和 node4是prod 主机组的成员</li>
+<li>node5是balancers 主机组的成员</li>
+<li>prod 组是webservers 主机组的成员</li>
+</ul>
+</li>
+<li>创建名为&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;ansible.cfg的配置文件，以满足以下要求：<ul>
+<li>主机清单文件为&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;inventory</li>
+<li>playbook 中使用的角色的位置包括&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;roles</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[curtis@control ansible]$ cat ansible.cfg</span><br><span class="line">[defaults]</span><br><span class="line">inventory=inventory</span><br><span class="line">roles_path=/home/curtis/ansible/roles</span><br><span class="line">remote_user=curtis</span><br><span class="line">ask_pass=False</span><br><span class="line">[privilege_escalation]</span><br><span class="line">become=True</span><br><span class="line">become_method=sudo</span><br><span class="line">become_user=root</span><br><span class="line">become_ask_pass=False</span><br><span class="line">[curtis@control ansible]$ cat inventory</span><br><span class="line">[dev]</span><br><span class="line">node1</span><br><span class="line">[test]</span><br><span class="line">node2</span><br><span class="line">[prod]</span><br><span class="line">node3</span><br><span class="line">node4</span><br><span class="line">[balancers]</span><br><span class="line">node5</span><br><span class="line">[webservers:children]</span><br><span class="line">prod</span><br><span class="line">检查方法：[curtis@control ansible]$ ansible-inventory  --list</span><br></pre></td></tr></table></figure>
+<h3 id="创建和运行Ansible-临时命令"><a href="#创建和运行Ansible-临时命令" class="headerlink" title="创建和运行Ansible 临时命令"></a>创建和运行Ansible 临时命令</h3><ol start="2">
+<li>作为系统管理员，您需要在受管节点上安装软件。<br>请按照正文所述，创建一个名为&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;adhoc.sh 的shell 脚本，该脚本将使用Ansible 临时命令在各个受管节点上安装yum 存储库：</li>
+</ol>
+<ul>
+<li>存储库1： <ul>
+<li>存储库的名称为 EX294_BASE </li>
+<li>描述为 EX294 base software</li>
+<li>基础URL为<code>http://rhgls.area12.example.com/dvd/BaseOS</code></li>
+<li>GPG 签名检查为启用状态 </li>
+<li>GPG 密钥URL 为 <code>http://rhgls.area12.example.com/dvd/RPM-GPG-KEY-redhat-release</code> </li>
+<li>存储库为启用状态</li>
+</ul>
+</li>
+<li>存储库2：<ul>
+<li>存储库的名称为 EX294_STREAM</li>
+<li>描述为EX294 stream software</li>
+<li>基础 URL为<code>http://rhgls.area12.example.com/dvd/AppStream</code></li>
+<li>GPG 签名检查为启用状态</li>
+<li>GPG 密钥 URL 为 <code>http://rhgls.area12.example.com/dvd/RPM-GPG-KEY-redhat-release</code></li>
+<li>存储库为启用状态</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[curtis@control ansible]<span class="variable">$cat</span> ad.hoc</span><br><span class="line"><span class="comment">#!/bin/bash</span></span><br><span class="line">ansible all -m yum_repository -a <span class="string">&#x27;name=ex294_BASE description=&quot;EX294 base software&quot; baseurl=http://rhgls.area12.example.com/dvd/BaseOS gpgcheck=yes gpgkey=http://rhgls.area12.example.com/dvd/RPM-GPG-KEY-redhat-release enabled=yes&#x27;</span></span><br><span class="line">ansible all -m yum_repository -a <span class="string">&#x27;name=ex294_STREAM description=&quot;EX294 stream software&quot; baseurl=http://rhgls.area12.example.com/dvd/AppStream gpgcheck=yes gpgkey=http://rhgls.area12.example.com/dvd/RPM-GPG-KEY-redhat-release enabled=yes&#x27;</span> </span><br><span class="line">[curtis@control ansible]<span class="variable">$chmod</span> 755 ad.hoc </span><br><span class="line">检查：</span><br><span class="line">[curtis@control ansible]<span class="variable">$ansible</span> all-a <span class="string">&quot;yum repolist -v &quot;</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装软件包"><a href="#安装软件包" class="headerlink" title="安装软件包"></a>安装软件包</h3><ol start="3">
+<li>创建一个名为&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;packages.yml 的playbook :</li>
+</ol>
+<ul>
+<li>将php 和mariadb 软件包安装到dev、test 和prod 主机组中的主机上</li>
+<li>将RPM Development Tools软件包组安装到dev 主机组中的主机上</li>
+<li>将dev 主机组中主机上的所有软件包更新为最新版本<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$</span> <span class="string">cat</span> <span class="string">packages.yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">dev,test,prod</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">yum:</span></span><br><span class="line">         <span class="attr">name:</span> <span class="string">php,mariadb</span></span><br><span class="line">         <span class="attr">state:</span> <span class="string">installed</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">dev</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">yum:</span></span><br><span class="line">         <span class="attr">name:</span> <span class="string">&quot;@RPM Development Tools&quot;</span>        </span><br><span class="line">         <span class="attr">state:</span> <span class="string">installed</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">dev</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">yum:</span></span><br><span class="line">         <span class="attr">name:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line">         <span class="attr">state:</span> <span class="string">latest</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="使用RHEL-系统角色"><a href="#使用RHEL-系统角色" class="headerlink" title="使用RHEL 系统角色"></a>使用RHEL 系统角色</h3><ol start="4">
+<li>安装RHEL 系统角色软件包，并创建符合以下条件的playbook &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;selinux.yml ：</li>
+</ol>
+<ul>
+<li>在所有受管节点上运行</li>
+<li>使用 selinux 角色</li>
+<li>配置该角色，以强制状态使用selinux<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  [root@control ~]$ yum install rhel-system-roles -y</span><br><span class="line">  [curtis@control ansible]$cp /usr/share/ansible/roles/rhel-system-roles.selinux/ roles/selinux  -r </span><br><span class="line">  [curtis@control ansible]$cat selinux.yml</span><br><span class="line">```yml</span><br><span class="line">- hosts: all</span><br><span class="line">  vars:</span><br><span class="line">     - selinux_policy: targeted      ####main.yml里边定义的变量</span><br><span class="line">       selinux_state: enforcing      ###默认为强制状态,强制状态转宽容，无需重启，精简剧本，后边加roles就可以了，如果是改为关闭状态，则需要重启，此时会报错，加上后续剧本，可以实现重启生效。enforcing permissive disabled</span><br><span class="line">  tasks:</span><br><span class="line">    - block:</span><br><span class="line">      - include_role:                ###模块，用来调用角色</span><br><span class="line">          name: roles/selinux</span><br><span class="line">      rescue:</span><br><span class="line">      - fail:         ###查看角色main.yml，根据中间定义可得，当在执行时出现need reboot报错（Enforcing变permissive不会报错，直接成功，切换disabled会报错），那么会在事实中定义一个变量   selinux_reboot_required ，如果变量有定义，则实现重启功能即可。变量无定义，后续任务不需要进行。</span><br><span class="line">        when: not selinux_reboot_required</span><br><span class="line">      - reboot:</span><br><span class="line">      - include_role:</span><br><span class="line">               name: roles/selinux</span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">检查</span><br><span class="line">[curtis@control ansible]$ ansible all -a &quot;getenforce&quot;</span><br><span class="line">node1 | CHANGED | rc=0 &gt;&gt;</span><br><span class="line">Enforcing</span><br></pre></td></tr></table></figure>
+<h3 id="使用Ansible-Galaxy-安装角色"><a href="#使用Ansible-Galaxy-安装角色" class="headerlink" title="使用Ansible Galaxy 安装角色"></a>使用Ansible Galaxy 安装角色</h3><ol start="5">
+<li>使用 Ansible Galaxy 和要求文件&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;roles&#x2F;requirements.yml 。从以下URL 下载角色并安装到&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;roles ：</li>
+</ol>
+<ul>
+<li><code>http://rhgls.area12.example.com/materials/haproxy.tar</code> 此角色的名称应当为balancer</li>
+<li><code>http://rhgls.area12.example.com/materials/phpinfo.tar</code> 此角色的名称应当为phpinfo<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[curtis@control ansible]$cat roles/requirements.yml</span><br><span class="line">- src: http://rhgls.area12.example.com/materials/haproxy.tar</span><br><span class="line">  name: balancer</span><br><span class="line">- src: http://rhgls.area12.example.com/materials/phpinfo.tar</span><br><span class="line">  name: phpinfo</span><br><span class="line">[curtis@control ansible]$ ansible-galaxy install -r roles/requirements.yml -p roles/</span><br><span class="line">- downloading role from http://rhgls.area12.example.com/materials/haproxy.tar</span><br><span class="line">- extracting haproxy to /home/student/roles/balancer</span><br><span class="line">- balancer was installed successfully</span><br><span class="line">- downloading role from http://rhgls.area12.example.com/materials/phpinfo.tar</span><br><span class="line">- extracting phpinfo to /home/student/roles/phpinfo</span><br><span class="line">- phpinfo was installed successfully</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="创建和使用角色"><a href="#创建和使用角色" class="headerlink" title="创建和使用角色"></a>创建和使用角色</h3><ol start="6">
+<li>根据下列要求，在&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;roles 中创建名为apache 的角色：</li>
+</ol>
+<ul>
+<li>httpd 软件包已安装，设为在系统启动时启用并启动</li>
+<li>防火墙已启用并正在运行，并使用允许访问 Web 服务器的规则</li>
+<li>模板文件index.html.j2 已存在，用于创建具有以下输出的文件&#x2F;var&#x2F;www&#x2F;html&#x2F;index.html ：<br>  <code>Welcome to HOSTNAME on IPADDRESS</code><br>其中，HOSTNAME 是受管节点的完全限定域名，IPADDRESS 则是受管节点的IP 地址。<br>按照下方所述，创建一个使用此角色的playbook &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;newrole.yml:<br>该playbook在webservers主机组的主机上运行。<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[curtis@control ansible]$ ansible-galaxy init roles/apache</span><br><span class="line">[curtis@control ansible]$ cat roles/apache/templates/index.html.j2</span><br><span class="line">Welcome to &#123;&#123;ansible_fqdn&#125;&#125; on &#123;&#123;ansible_default_ipv4.address&#125;&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$</span> <span class="string">cat</span> <span class="string">roles/apache/tasks/main.yml</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="comment">#tasks file for roles/apache</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">yum:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">httpd</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">installed</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">yum:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">firewalld</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">installed</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">service:</span>       </span><br><span class="line">       <span class="attr">name:</span> <span class="string">httpd</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">restarted</span></span><br><span class="line">       <span class="attr">enabled:</span> <span class="literal">yes</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">service:</span>       </span><br><span class="line">       <span class="attr">name:</span> <span class="string">firewalld</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">restarted</span></span><br><span class="line">       <span class="attr">enabled:</span> <span class="literal">yes</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">firewalld:</span>        </span><br><span class="line">        <span class="attr">service:</span> <span class="string">http</span></span><br><span class="line">        <span class="attr">permanent:</span> <span class="literal">yes</span></span><br><span class="line">        <span class="attr">immediate:</span> <span class="literal">yes</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">enabled</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">template:</span>         </span><br><span class="line">         <span class="attr">src:</span> <span class="string">index.html.j2</span></span><br><span class="line">         <span class="attr">dest:</span> <span class="string">/var/www/html/index.html</span></span><br><span class="line">         <span class="attr">setype:</span> <span class="string">httpd_sys_content_t</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[curtis@control ansible]$ cat newrole.yml</span><br><span class="line">- hosts: webservers  </span><br><span class="line">  roles: </span><br><span class="line">      - apache</span><br><span class="line">检查</span><br><span class="line">curl node1</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="从-Ansible-Galaxy-使用角色"><a href="#从-Ansible-Galaxy-使用角色" class="headerlink" title="从 Ansible Galaxy 使用角色"></a>从 Ansible Galaxy 使用角色</h3><ol start="7">
+<li>根据下列要求，创建一个名为 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;roles.yml 的 playbook ：</li>
+</ol>
+<ul>
+<li>playbook 中包含一个 play， 该 play 在 balancers 主机组中的主机上运行并将使用 balancer 角色。</li>
+<li>此角色配置一项服务，以在 webservers 主机组中的主机之间平衡 Web 服务器请求的负载。<ul>
+<li>浏览到 balancers 主机组中的主机（例如 <code>http://node5.area12.example.com</code> ）将生成以下输出：<br>  Welcom to node3.area12.example.com on 172.24.12.8</li>
+<li>重新加载浏览器将从另一 Web 服务器生成输出：<br>  Welcom to node4.area12.example.com on 172.24.12.9</li>
+</ul>
+</li>
+<li>playbook 中包含一个 play， 该 play 在 webservers 主机组中的主机上运行并将使用 phpinfo 角色。<ul>
+<li>请通过 URL&#x2F;hello.php 浏览到 webservers 主机组中的主机将生成以下输出：<br>  <strong>Hello PHP World from FQDN</strong><br>  其中，FQDN 是主机的完全限定名称。<br>  例如，浏览到<code>http://node3.area12.example.com/hello.php</code>将会生成以下输出：<br>  <strong>Hello PHP World from node3.area12.example.com</strong><br>  另外还有 PHP 配置的各种详细信息，如安装的 PHP 版本等。<br>  同样，浏览到<code>http://node4.area12.example.com/hello.php</code>会生成以下输出：<br>  <strong>Hello PHP World from node4.area12.example.com</strong><br>  另外还有 PHP 配置的各种详细信息，如安装的 PHP 版本等。<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$cat</span> <span class="string">roles.yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">all</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">balancers</span></span><br><span class="line">  <span class="attr">roles:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="string">balancer</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">webservers</span></span><br><span class="line">  <span class="attr">roles:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="string">phpinfo</span></span><br><span class="line">  <span class="attr">tasks:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="attr">yum:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">firewalld</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">installed</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">service:</span>       </span><br><span class="line">        <span class="attr">name:</span> <span class="string">firewalld</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">restarted</span></span><br><span class="line">        <span class="attr">enabled:</span> <span class="literal">yes</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">firewalld:</span>        </span><br><span class="line">        <span class="attr">service:</span> <span class="string">http</span></span><br><span class="line">        <span class="attr">permanent:</span> <span class="literal">yes</span></span><br><span class="line">        <span class="attr">immediate:</span> <span class="literal">yes</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">enabled</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">检查</span><br><span class="line">[curtis@control ansible]$curl node5</span><br><span class="line">Welcom to node3.area12.example.com on 172.24.12.8</span><br><span class="line">[curtis@control ansible]$curl node5</span><br><span class="line">Welcom to node4.area12.example.com on 172.24.12.9</span><br><span class="line">[curtis@control ansible]$curl node3/hello.php -s | head -1</span><br><span class="line">Hello PHP World from node3.area12.example.com&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;DTD/xhtml1-transitional.dtd&quot;&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="创建和使用分区"><a href="#创建和使用分区" class="headerlink" title="创建和使用分区"></a>创建和使用分区</h3><ol start="8">
+<li>编写一个剧本位置在&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;partition.yml,在所有主机上运行，需求如下：</li>
+</ol>
+<ul>
+<li>该剧本包含一个play，该play在balancers主机组上运行<ul>
+<li>在vdb中，创建单个主分区，编号是1，大小10G</li>
+<li>格式化成ext4文件系统，挂载到&#x2F;newpart，</li>
+<li>在设备vdd上创建单个主分区，编号是1，大小10G</li>
+<li>格式化成ext4文件系统，挂载到&#x2F;newpart1，</li>
+<li>如果无法创建请求的分区大小，则使用错误消息Could not create parton of that size，转而应用分区800M</li>
+<li>如果设备vdd不存在，则输出错误提示disk vdd done not exist<br>  <del>####考试时的大小vdb硬盘是满足的，可以直接格式化挂载。答案的方法是先要对vdb进行判断，具体做法看考题环境。</del><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$cat</span> <span class="string">partition.yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">all</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">block:</span></span><br><span class="line">         <span class="bullet">-</span> <span class="attr">parted:</span></span><br><span class="line">             <span class="attr">device:</span> <span class="string">/dev/vdb</span></span><br><span class="line">             <span class="attr">number:</span> <span class="number">1</span></span><br><span class="line">             <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">             <span class="attr">part_end:</span> <span class="string">10GiB</span></span><br><span class="line">      <span class="attr">rescue:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">debug:</span></span><br><span class="line">           <span class="attr">msg:</span> <span class="string">&quot;Could not create partion of that size&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">parted:</span></span><br><span class="line">             <span class="attr">device:</span> <span class="string">/dev/vdb</span></span><br><span class="line">             <span class="attr">number:</span> <span class="number">1</span></span><br><span class="line">             <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">             <span class="attr">part_end:</span> <span class="string">1GiB</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">filesystem:</span></span><br><span class="line">         <span class="attr">fstype:</span> <span class="string">ext4</span></span><br><span class="line">         <span class="attr">dev:</span> <span class="string">/dev/vdb1</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">file:</span> </span><br><span class="line">         <span class="attr">path:</span> <span class="string">/newpart</span></span><br><span class="line">         <span class="attr">state:</span> <span class="string">file</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mount:</span></span><br><span class="line">         <span class="attr">path:</span> <span class="string">/newpart</span></span><br><span class="line">         <span class="attr">src:</span> <span class="string">/dev/vdb1</span></span><br><span class="line">         <span class="attr">fstype:</span> <span class="string">ext4</span></span><br><span class="line">         <span class="attr">state:</span> <span class="string">mounted</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">debug:</span></span><br><span class="line">        <span class="attr">msg:</span> <span class="string">&quot;disk vdd done not exist&quot;</span></span><br><span class="line">      <span class="attr">when:</span> <span class="string">ansible_devices.vdd</span> <span class="string">is</span> <span class="string">undefined</span></span><br><span class="line">      <span class="attr">failed_when:</span> <span class="string">ansible_devices.vdd</span> <span class="string">is</span> <span class="string">undefined</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">block:</span></span><br><span class="line">         <span class="bullet">-</span> <span class="attr">parted:</span></span><br><span class="line">             <span class="attr">device:</span> <span class="string">/dev/vdd</span></span><br><span class="line">             <span class="attr">number:</span> <span class="number">1</span></span><br><span class="line">             <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">             <span class="attr">part_end:</span> <span class="string">10GiB</span></span><br><span class="line">      <span class="attr">rescue:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">debug:</span></span><br><span class="line">           <span class="attr">msg:</span> <span class="string">&quot;Could not create partion of that size&quot;</span></span><br><span class="line">        <span class="bullet">-</span> <span class="attr">parted:</span></span><br><span class="line">             <span class="attr">device:</span> <span class="string">/dev/vdd</span></span><br><span class="line">             <span class="attr">number:</span> <span class="number">1</span></span><br><span class="line">             <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">             <span class="attr">part_end:</span> <span class="string">1GiB</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">filesystem:</span></span><br><span class="line">         <span class="attr">fstype:</span> <span class="string">ext4</span></span><br><span class="line">         <span class="attr">dev:</span> <span class="string">/dev/vdd1</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">file:</span> </span><br><span class="line">         <span class="attr">path:</span> <span class="string">/newpart1</span></span><br><span class="line">         <span class="attr">state:</span> <span class="string">file</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">mount:</span></span><br><span class="line">         <span class="attr">path:</span> <span class="string">/newpart1</span></span><br><span class="line">         <span class="attr">src:</span> <span class="string">/dev/vdd1</span></span><br><span class="line">         <span class="attr">fstype:</span> <span class="string">ext4</span></span><br><span class="line">         <span class="attr">state:</span> <span class="string">mounted</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">检查</span><br><span class="line">[curtis@control ansible]$ansible balancers -a “lsblk”</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="生成主机文件"><a href="#生成主机文件" class="headerlink" title="生成主机文件"></a>生成主机文件</h3><ol start="9">
+<li>将一个初始模板文件从 <code>http://rhgls.area12.example.com/materials/hosts.j2</code> 下载到 &#x2F;home&#x2F;curtis&#x2F;ansible<br>完成该模板，以便用它生成以下文件：</li>
+</ol>
+<ul>
+<li>针对每个清单主机包含一行内容，其格式与 &#x2F;etc&#x2F;hosts 相同</li>
+<li>创建名为 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;hosts.yml 的 playbook ，它将使用此模板在 dev 主机组中的主机上生成文件 &#x2F;etc&#x2F;myhosts 。<br>该 playbook 运行后， dev 主机组中主机上的文件 &#x2F;etc&#x2F;myhosts 应针对每个受管主机包含一行内容：<br>127.0.0.1 localhost localhost.localdomain localhost4 localhost4.localdomain4<br>::1 localhost localhost.localdomain localhost6 localhost6.localdomain6<br>172.24.12.6 node1.area12.example.com node1<br>172.24.12.7 node2.area12.example.com node2<br>172.24.12.8 node3.area12.example.com node3<br>172.24.12.9 node4.area12.example.com node4<br>172.24.12.10 node5.area12.example.com node5<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[curtis@control ansible]$cat hosts.j2</span><br><span class="line">127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4</span><br><span class="line">::1         localhost localhost.localdomain localhost6 localhost6.localdomain6</span><br><span class="line">&#123;% for i in groups.all %&#125;</span><br><span class="line">&#123;&#123; hostvars[i].ansible_default_ipv4.address &#125;&#125; &#123;&#123; hostvars[i].ansible_fqdn &#125;&#125;  &#123;&#123; hostvars[i].ansible_hostname &#125;&#125;</span><br><span class="line">&#123;%endfor%&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$cat</span> <span class="string">hosts.yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">all</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">dev</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">template:</span></span><br><span class="line">      <span class="attr">src:</span> <span class="string">hosts.j2</span></span><br><span class="line">      <span class="attr">dest:</span> <span class="string">/etc/myhosts</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">检查</span><br><span class="line">[curtis@control ansible]$ansible all -a “cat /etc/myhosts”</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="修改文件内容"><a href="#修改文件内容" class="headerlink" title="修改文件内容"></a>修改文件内容</h3><ol start="10">
+<li>按照下方所述，创建一个名为 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;issue.yml 的 playbook ：</li>
+</ol>
+<ul>
+<li>该 playbook 将在所有清单主机上运行</li>
+<li>该 playbook 会将 &#x2F;etc&#x2F;issue 的内容替换为下方所示的一行文本：<ul>
+<li>在 dev 主机组中的主机上，这行文本显示 为：Development</li>
+<li>在 test 主机组中的主机上，这行文本显示 为：Test</li>
+<li>在 prod 主机组中的主机上，这行文本显示 为：Production<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$cat</span> <span class="string">issure.yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">all</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">copy:</span></span><br><span class="line">       <span class="attr">content:</span> <span class="string">Development</span></span><br><span class="line">       <span class="attr">dest:</span> <span class="string">/etc/issue</span></span><br><span class="line">     <span class="attr">when:</span> <span class="string">&quot;&#x27;dev&#x27; in group_names&quot;</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">copy:</span></span><br><span class="line">       <span class="attr">content:</span> <span class="string">Test</span></span><br><span class="line">       <span class="attr">dest:</span> <span class="string">/etc/issue</span></span><br><span class="line">     <span class="attr">when:</span> <span class="string">&quot;&#x27;test&#x27; in group_names&quot;</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">copy:</span></span><br><span class="line">       <span class="attr">content:</span> <span class="string">Production</span></span><br><span class="line">       <span class="attr">dest:</span> <span class="string">/etc/issue</span></span><br><span class="line">     <span class="attr">when:</span> <span class="string">&quot;&#x27;prod&#x27; in group_names&quot;</span></span><br><span class="line"><span class="string">检查</span></span><br><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$ansible</span> <span class="string">all</span> <span class="string">-a</span> <span class="string">&quot;cat /etc/issue&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="创建-Web-内容目录"><a href="#创建-Web-内容目录" class="headerlink" title="创建 Web 内容目录"></a>创建 Web 内容目录</h3><ol start="11">
+<li>按照下方所述，创建一个名为 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;webcontent.yml 的 playbook ：</li>
+</ol>
+<ul>
+<li>该 playbook 在 dev 主机组中的受管节点上运行</li>
+<li>创建符合下列要求的目录 &#x2F;webdev ：<ul>
+<li>所有者为 webdev 组</li>
+<li>具有常规权限：owner&#x3D;read+write+execute ， group&#x3D;read+write+execute ，other&#x3D;read+execute</li>
+<li>具有特殊权限：设置组ID</li>
+<li>用符号链接将 &#x2F;var&#x2F;www&#x2F;html&#x2F;webdev 链接到 &#x2F;webdev</li>
+<li>创建文件 &#x2F;webdev&#x2F;index.html ，其中包含如下所示的单行文件： Development</li>
+<li>在 dev 主机组中主机上浏览此目录（例如 <code>http://node1.area12.example.com/webdev/</code> ）将生成以下输出：<br>  Development<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$cat</span> <span class="string">webcontent.yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">dev</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">yum:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">httpd</span></span><br><span class="line">      <span class="attr">state:</span> <span class="string">installed</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">yum:</span></span><br><span class="line">      <span class="attr">name:</span> <span class="string">firewalld</span></span><br><span class="line">      <span class="attr">state:</span> <span class="string">installed</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">service:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">httpd</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">started</span></span><br><span class="line">       <span class="attr">enabled:</span> <span class="literal">yes</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">service:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">firewalld</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">started</span></span><br><span class="line">       <span class="attr">enabled:</span> <span class="literal">yes</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">firewalld:</span></span><br><span class="line">       <span class="attr">service:</span> <span class="string">http</span></span><br><span class="line">       <span class="attr">permanent:</span> <span class="literal">yes</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">enabled</span></span><br><span class="line">       <span class="attr">immediate:</span> <span class="literal">yes</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">group:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">webdev</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">file:</span></span><br><span class="line">       <span class="attr">path:</span> <span class="string">/webdev</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">directory</span></span><br><span class="line">       <span class="attr">mode:</span> <span class="string">&#x27;2775&#x27;</span></span><br><span class="line">       <span class="attr">group:</span> <span class="string">webdev</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">file:</span></span><br><span class="line">        <span class="attr">src:</span> <span class="string">/webdev</span></span><br><span class="line">        <span class="attr">dest:</span> <span class="string">/var/www/html/webdev</span></span><br><span class="line">        <span class="attr">state:</span> <span class="string">link</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">copy:</span></span><br><span class="line">        <span class="attr">dest:</span> <span class="string">/webdev/index.html</span></span><br><span class="line">        <span class="attr">content:</span> <span class="string">&#x27;Development&#x27;</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">sefcontext:</span></span><br><span class="line">      <span class="attr">target:</span> <span class="string">&#x27;/webdev(/.*)?&#x27;</span></span><br><span class="line">      <span class="attr">setype:</span> <span class="string">httpd_sys_content_t</span></span><br><span class="line">      <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">command:</span> <span class="string">restorecon</span> <span class="string">-rv</span> <span class="string">/webdev</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">检查</span><br><span class="line">[curtis@control ansible]$curl node1/index.html</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="生成硬件报告"><a href="#生成硬件报告" class="headerlink" title="生成硬件报告"></a>生成硬件报告</h3><ol start="12">
+<li>创建一个名为 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;hwreport.yml 的 playbook ，它将在所有受管节点上生成含有以下信息的输出文件 &#x2F;root&#x2F;hwreport.txt ：</li>
+</ol>
+<ul>
+<li>清单主机名称</li>
+<li>以 MB 表示的总内存大小</li>
+<li>BIOS 版本</li>
+<li>磁盘设备 vda 的大小</li>
+<li>磁盘设备 vdb 的大小</li>
+<li>输出文件中的每一行含有一个 key&#x3D;value 对。<br><strong>您的 playbook 应当：</strong></li>
+<li>从 <code>http://rhgls.area12.example.com/materials/hwreport.empty</code> 下载文件，并将它保存为 &#x2F;root&#x2F;hwreport.txt</li>
+<li>使用正确的值改为 &#x2F;root&#x2F;hwreport.txt</li>
+<li>如果硬件项不存在，相关的值应设为 NONE<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$cat</span> <span class="string">hwreport.yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">all</span> </span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">get_url:</span></span><br><span class="line">              <span class="attr">url:</span> <span class="string">http://rhgls.area12.example.com/materials/hwreport.empty</span></span><br><span class="line">              <span class="attr">dest:</span> <span class="string">/root/hwreport.txt</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">replace:</span></span><br><span class="line">                  <span class="attr">path:</span> <span class="string">/root/hwreport.txt</span></span><br><span class="line">                  <span class="attr">regexp:</span> <span class="string">inventoryhostname</span></span><br><span class="line">                  <span class="attr">replace:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;ansible_hostname | default(none) &#125;&#125;</span>&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">replace:</span></span><br><span class="line">                  <span class="attr">path:</span> <span class="string">/root/hwreport.txt</span></span><br><span class="line">                  <span class="attr">regexp:</span> <span class="string">BIOS_version</span></span><br><span class="line">                  <span class="attr">replace:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;ansible_bios_version | default(none) &#125;&#125;</span>&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">replace:</span></span><br><span class="line">                  <span class="attr">path:</span> <span class="string">/root/hwreport.txt</span></span><br><span class="line">                  <span class="attr">regexp:</span> <span class="string">disk_vda_size</span></span><br><span class="line">                  <span class="attr">replace:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;ansible_devices.vda.size | default(none) &#125;&#125;</span>&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">replace:</span></span><br><span class="line">                  <span class="attr">path:</span> <span class="string">/root/hwreport.txt</span></span><br><span class="line">                  <span class="attr">regexp:</span> <span class="string">disk_vdb_size</span></span><br><span class="line">                  <span class="attr">replace:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;ansible_devices.vdb.size | default(none) &#125;&#125;</span>&quot;</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">replace:</span></span><br><span class="line">                  <span class="attr">path:</span> <span class="string">/root/hwreport.txt</span></span><br><span class="line">                  <span class="attr">regexp:</span> <span class="string">memory_in_MB</span></span><br><span class="line">                  <span class="attr">replace:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;&#123;ansible_memtotal_mb | default(none)&#125;&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">检查</span><br><span class="line">[curtis@control ansible]$ansible node1 -a &quot;cat /root/hwreport.txt&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="创建密码库"><a href="#创建密码库" class="headerlink" title="创建密码库"></a>创建密码库</h3><ol start="13">
+<li>按照下方所述，创建一个 Ansible 库来存储用户密码：</li>
+</ol>
+<ul>
+<li>库名称为 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;locker.yml</li>
+<li>库中含有两个变量，名称如下：<ul>
+<li>pw_developer，值为 Imadev</li>
+<li>pw_manager，值为 Imamgr</li>
+</ul>
+</li>
+<li>用于加密和解密该库的密码为 whenyouwishuponastar</li>
+<li>密码存储在文件 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;secret.txt 中<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[curtis@control ansible]$cat secret.txt</span><br><span class="line">whenyouwishuponastar </span><br><span class="line">[curtis@control ansible]$ansible-vault view --vault-password-file=secret.txt locker.yml</span><br><span class="line">pw_developer: Imadev</span><br><span class="line">pw_manager: Imamgr</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="创建用户帐户"><a href="#创建用户帐户" class="headerlink" title="创建用户帐户"></a>创建用户帐户</h3><ol start="14">
+<li>从<code>http://rhgls.area12.example.com/materials/user_list.yml</code>下载要创建的用户的列表，并将它保存到 &#x2F;home&#x2F;curtis&#x2F;ansible</li>
+</ol>
+<ul>
+<li>在本次考试中使用在其他位置创建的密码库 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;locker.yml 。</li>
+<li>创建名为 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;users.yml 的 playbook ，从而按以下所述创建用户帐户：<ul>
+<li>职位描述为 developer 的用户应当：<ul>
+<li>在 dev 和 test 主机组中的受管节点上创建</li>
+<li>从 pw_developer 变量分配密码</li>
+<li>分配对应用户id</li>
+<li>是补充组 devops 的成员</li>
+</ul>
+</li>
+<li>职位描述为 manager 的用户应当：<ul>
+<li>在 prod 主机组中的受管节点上创建</li>
+<li>从 pw_manager 变量分配密码</li>
+<li>分配对应用户id</li>
+<li>是补充组 opsmgr 的成员</li>
+</ul>
+</li>
+<li>密码采用 SHA512 哈希格式。</li>
+<li>您的 playbook 应能够在本次考试中使用在其他位置创建的库密码文件 &#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;secret.txt 正常运行。<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$cat</span> <span class="string">users.yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">all</span></span><br><span class="line">  <span class="attr">vars_files:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">locker.yml</span></span><br><span class="line">          <span class="bullet">-</span> <span class="string">user_list.yml</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">group:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">devops</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">group:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">opsmgr</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">user:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123; item.name &#125;&#125;</span>&quot;</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">       <span class="attr">password:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123; pw_developer |password_hash(&#x27;sha512&#x27;)&#125;&#125;</span>&quot;</span></span><br><span class="line">       <span class="attr">uid:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;item.uid&#125;&#125;</span>&quot;</span></span><br><span class="line">       <span class="attr">groups:</span> <span class="string">test</span></span><br><span class="line">     <span class="attr">when:</span> <span class="string">(&#x27;dev&#x27;</span> <span class="string">in</span> <span class="string">group_names</span> <span class="string">or</span> <span class="string">&#x27;test&#x27;</span> <span class="string">in</span> <span class="string">group_names)</span> <span class="string">and</span> <span class="string">(item.job</span> <span class="string">==</span> <span class="string">&quot;developer&quot;</span><span class="string">)</span></span><br><span class="line">     <span class="attr">loop:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123; users &#125;&#125;</span>&quot;</span></span><br><span class="line">   <span class="bullet">-</span> <span class="attr">user:</span></span><br><span class="line">       <span class="attr">name:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123; item.name &#125;&#125;</span>&quot;</span></span><br><span class="line">       <span class="attr">state:</span> <span class="string">present</span></span><br><span class="line">       <span class="attr">uid:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;item.uid&#125;&#125;</span>&quot;</span></span><br><span class="line">       <span class="attr">password:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123; pw_manager |password_hash(&#x27;sha512&#x27;)&#125;&#125;</span>&quot;</span></span><br><span class="line">       <span class="attr">groups:</span> <span class="string">ops</span></span><br><span class="line">     <span class="attr">when:</span> <span class="string">(&#x27;prod&#x27;</span> <span class="string">in</span> <span class="string">group_names</span> <span class="string">)</span> <span class="string">and</span> <span class="string">(item.job</span> <span class="string">==</span> <span class="string">&quot;manager&quot;</span><span class="string">)</span></span><br><span class="line">     <span class="attr">loop:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123; users &#125;&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">执行：</span><br><span class="line">[curtis@control ansible]$ansible-playbook users.yml --vault-password-file=secret.txt</span><br><span class="line">验证:</span><br><span class="line">[curtis@control ansible]$ansible all -a &quot;tail -2 /etc/passwd&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="更新-Ansible-库的密钥"><a href="#更新-Ansible-库的密钥" class="headerlink" title="更新 Ansible 库的密钥"></a>更新 Ansible 库的密钥</h3><ol start="15">
+<li>按照下方所述，更新现有 Ansible 库的密钥：</li>
+</ol>
+<ul>
+<li>从<code>http://rhgls.area12.example.com/materials/salaries.yml</code>下载 Ansible 库到 &#x2F;home&#x2F;curtis&#x2F;ansible<ul>
+<li>当前的库密码为 insecure8sure</li>
+<li>新的库密码为 bbs2you9527</li>
+<li>库使用新密码保持加密状态<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[curtis@control ansible]$ansible-vault rekey salaries.yml</span><br><span class="line">Vault password:</span><br><span class="line">New Vault password:</span><br><span class="line">Confirm New Vault password:</span><br><span class="line">Rekey successful</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="配置cron作业"><a href="#配置cron作业" class="headerlink" title="配置cron作业"></a>配置cron作业</h3><ol start="16">
+<li>创建名为&#x2F;home&#x2F;curtis&#x2F;ansible&#x2F;cron.yml的playbook，在所有托管主机上运行为用户curtis创建如下cron作业：</li>
+</ol>
+<ul>
+<li>用户curtis必须配置运行每隔2分钟执行logger “EX294 in progress”的cron作业<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">curtis@control</span> <span class="string">ansible</span>]<span class="string">$cat</span> <span class="string">cron.yml</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">hosts:</span> <span class="string">all</span></span><br><span class="line">  <span class="attr">tasks:</span></span><br><span class="line">     <span class="bullet">-</span> <span class="attr">cron:</span> </span><br><span class="line">         <span class="attr">user:</span> <span class="string">curtis</span></span><br><span class="line">         <span class="attr">minute:</span> <span class="string">&quot;*/2&quot;</span></span><br><span class="line">         <span class="attr">job:</span> <span class="string">logger</span> <span class="string">&quot;EX294 in progress&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">验证：</span><br><span class="line">[curtis@control ansible]$ansible all  -a &quot;crontab -l -u curtis&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+        <hr class="fhr">
+        <div id="vcomments"></div>
+    
+</div>
+    <div class="footer" id="footer">
+    <p><h4>版权所有 © 2022 | 作者: dovey | 主题 By <a class="theme-author" target="_blank" rel="noopener" href="https://github.com/Xunzhuo/hexo-theme-coder" style="font-size:14px; color: #969696">Coder</a></h4>
+    
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <span id="busuanzi_container_site_pv">本站浏览总访问量: <span id="busuanzi_value_site_pv"></span></span>
+        <span class="post-meta-divider">|</span>
+        <span id="busuanzi_container_site_uv">本站访问人数: <span id="busuanzi_value_site_uv"></span></span>
+    
+    <label class="el-switch el-switch-blue el-switch-sm" style="vertical-align: sub;">
+        <input type="checkbox" name="switch" id="update_style">
+        <span class="el-switch-style"></span>
+    </label>
+
+    <!--         <script type="text/javascript">
+    var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+    document.write(unescape("%3Cspan id='cnzz_stat_icon_1278548644'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "v1.cnzz.com/stat.php%3Fid%3D1278548644%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));
+    </script> -->
+</p>
+</div>
+
+<input type="hidden" id="web_style" value="black">
+<input type="hidden" id="valine_appid" value="">
+<input type="hidden" id="valine_appKey" value="">
+
+<script src="/libs/jquery.min.js"></script>
+
+
+<script src="/libs/highlight/highlight.pack.js"></script>
+
+<script src='//cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+
+<script src="/js/js.js"></script>
+
+<style type="text/css">
+.v * {
+color: #698fca;
+}
+.v .vlist .vcard .vhead .vsys {
+color: #3a3e4a;
+}
+.v .vlist .vcard .vh .vmeta .vat {
+color: #638fd5;
+}
+.v .vlist .vcard .vhead .vnick {
+color: #6ba1ff;
+}
+.v a {
+color: #8696b1;
+}
+.v .vlist .vcard .vhead .vnick:hover {
+color: #669bfc;
+}
+</style>
+    <script type="text/javascript" color="173,174,173" opacity='1' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+</body>
+</html>
