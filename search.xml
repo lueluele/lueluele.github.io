@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>butterfly主题魔改（一）</title>
+      <link href="/posts/38766/"/>
+      <url>/posts/38766/</url>
+      
+        <content type="html"><![CDATA[<h3 id="书记留言板"><a href="#书记留言板" class="headerlink" title="书记留言板"></a>书记留言板</h3><p>效果如图：<img src="https://s2.loli.net/2022/09/29/8AibaRecEyMjIhk.png" alt="image-20220929111723749"></p><p>修改方法：</p><ol><li>在hexo博客根目录下安装插件</li></ol><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-butterfly-envelope --save</span><br></pre></td></tr></table></figure><ol start="2"><li>打开网站配置文件或者主题配置文件，添加如下代码</li></ol><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># envelope_comment</span></span><br><span class="line"><span class="comment"># see https://akilar.top/posts/e2d3c450/</span></span><br><span class="line"><span class="attr">envelope_comment:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span> <span class="comment">#控制开关</span></span><br><span class="line">  <span class="attr">custom_pic:</span>      </span><br><span class="line">    <span class="attr">cover:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-envelope/lib/violet.jpg</span> <span class="comment">#信笺头部图片</span></span><br><span class="line">    <span class="attr">line:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-envelope/lib/line.png</span> <span class="comment">#信笺底部图片</span></span><br><span class="line">    <span class="attr">beforeimg:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-envelope/lib/before.png</span> <span class="comment"># 信封前半部分</span></span><br><span class="line">    <span class="attr">afterimg:</span> <span class="string">https://npm.elemecdn.com/hexo-butterfly-envelope/lib/after.png</span> <span class="comment"># 信封后半部分</span></span><br><span class="line">  <span class="attr">message:</span> <span class="comment">#信笺正文，多行文本，写法如下</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">有什么想问的？</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">有什么想说的？</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">有什么想吐槽的？</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">哪怕是有什么想吃的，都可以告诉我哦~</span></span><br><span class="line">  <span class="attr">bottom:</span> <span class="string">自动书记人偶竭诚为您服务！</span> <span class="comment">#仅支持单行文本</span></span><br><span class="line">  <span class="attr">height:</span> <span class="comment">#1050px，信封划出的高度</span></span><br><span class="line">  <span class="attr">path:</span> <span class="comment">#【可选】comments 的路径名称。默认为 comments，生成的页面为 comments/index.html</span></span><br><span class="line">  <span class="attr">front_matter:</span> <span class="comment">#【可选】comments页面的 front_matter 配置</span></span><br><span class="line">    <span class="attr">title:</span> <span class="string">留言板</span></span><br><span class="line">    <span class="attr">comments:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 分享 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>vlan基本原理</title>
       <link href="/posts/52179/"/>
       <url>/posts/52179/</url>
