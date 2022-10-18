@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>windows静态路由</title>
+      <link href="/posts/46735/"/>
+      <url>/posts/46735/</url>
+      
+        <content type="html"><![CDATA[<p>在部署HCIE云计算环境时，由于前期借鉴了官方部署手册，在部署部分虚拟机时将网络使用了跟公司内网向邻近的网段，后期为了让学生使用跳转机，而给虚拟机添加了链接公网的网卡，使得虚拟机双网卡（公网跳转、私网互联），私网有三层连接，而这也产生了一个问题，那就是默认其他虚拟机无法被跳转机直接访问，所以这时候需要使用win的静态路由。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">route 可以创建、查看、删除静态路由</span><br><span class="line">ROUTE [-<span class="type">f</span>] [-<span class="type">p</span>] [-<span class="number">4</span>|-<span class="number">6</span>] command [<span class="type">destination</span>]  [<span class="type">MASK</span> <span class="type">netmask</span>]  [<span class="type">gateway</span>] [<span class="type">METRIC</span> <span class="type">metric</span>]  [<span class="type">IF</span> <span class="built_in">int</span><span class="type">erface</span>]</span><br><span class="line"> <span class="operator">-f</span>           清除所有网关项的路由表。如果与某个</span><br><span class="line">               命令结合使用，在运行该命令前，</span><br><span class="line">               应清除路由表。</span><br><span class="line"></span><br><span class="line">  <span class="literal">-p</span>           与 ADD 命令结合使用时，将路由设置为</span><br><span class="line">               在系统引导期间保持不变。默认情况下，重新启动系统时，</span><br><span class="line">               不保存路由。忽略所有其他命令，</span><br><span class="line">               这始终会影响相应的永久路由。</span><br><span class="line"></span><br><span class="line">  <span class="literal">-4</span>           强制使用 IPv4。</span><br><span class="line"></span><br><span class="line">  <span class="literal">-6</span>           强制使用 IPv6。</span><br><span class="line"></span><br><span class="line">  command      其中之一:</span><br><span class="line">                 PRINT     打印路由</span><br><span class="line">                 ADD       添加路由</span><br><span class="line">                 DELETE    删除路由</span><br><span class="line">                 CHANGE    修改现有路由</span><br><span class="line">  destination  指定主机。</span><br><span class="line">  MASK         指定下一个参数为“netmask”值。</span><br><span class="line">  netmask      指定此路由项的子网掩码值。</span><br><span class="line">               如果未指定，其默认设置为 <span class="number">255.255</span>.<span class="number">255.255</span>。</span><br><span class="line">  gateway      指定网关。</span><br><span class="line">  interface    指定路由的接口号码。</span><br><span class="line">  METRIC       指定跃点数，例如目标的成本。</span><br><span class="line"> </span><br></pre></td></tr></table></figure><p>所以，如果要永久设置静态路由，则使用如下方式</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">route add  <span class="literal">-p</span>  <span class="number">192.168</span>.<span class="number">1.0</span> mask <span class="number">255.255</span>.<span class="number">255.0</span> <span class="number">192.168</span>.<span class="number">2.254</span></span><br><span class="line">其中<span class="number">192.168</span>.<span class="number">1.0</span>/<span class="number">24</span>为要路由到的地址，<span class="number">192.168</span>.<span class="number">2.254</span>为本机某网卡的网关，当然也可以使用<span class="keyword">if</span>设置接口，接口号在下述命令中查看。</span><br><span class="line">配置完成，使用如下命令查看即可</span><br><span class="line">route  print</span><br></pre></td></tr></table></figure><p>如果不需要相应的路由条目了，使用如下方式删除即可。</p><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route delete <span class="number">192.168</span>.<span class="number">1.0</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 随笔 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 路由 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>RHEL系列网站环境SELinux的设置</title>
       <link href="/posts/54274/"/>
       <url>/posts/54274/</url>
