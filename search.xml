@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>家庭装修MESH组网设计</title>
+      <link href="/posts/18831/"/>
+      <url>/posts/18831/</url>
+      
+        <content type="html"><![CDATA[<h3 id="组网方法一（家用网管交换机-客厅单线复用）"><a href="#组网方法一（家用网管交换机-客厅单线复用）" class="headerlink" title="组网方法一（家用网管交换机+客厅单线复用）"></a>组网方法一（家用网管交换机+客厅单线复用）</h3><p><img src="https://s2.loli.net/2022/10/24/9ZiePklBMoNGTtY.png" alt="单线复用"></p><p>光猫LAN口连接交换机1口（设置PVID 10 ；untagged vlan 10），IPTV连接交换机2口（设置PVID 20 ；untagged vlan 20），交换机3口（tagged vlan 10 20 30）单线复用到客厅，客厅墙插连接第二台交换机3口（tagged vlan 10 20 30），第二台交换机1口（设置PVID 10 ；untagged vlan 10）连接电视看IPTV，2口（设置PVID 20 ；untagged vlan 20）连接主路由wan口，4口（设置PVID 30 ；untagged vlan 30）连接主路由LAN口，用于有线mesh回程。</p><p>优点：单线复用</p><p>缺点：交换机价格贵、需要在客厅放置交换机</p><h3 id="组网方法二（无交换机-三线到客厅）"><a href="#组网方法二（无交换机-三线到客厅）" class="headerlink" title="组网方法二（无交换机+三线到客厅）"></a>组网方法二（无交换机+三线到客厅）</h3><p><img src="https://s2.loli.net/2022/10/24/3QoniO9fcZVs5BG.png" alt="三线无复用"></p><p>优点：组网简单，价格便宜</p><p>缺点：需要事先预埋三根网线，且客厅需要网线墙插比较多。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 随笔 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> vlan </tag>
+            
+            <tag> mesh </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>timeline</title>
       <link href="/posts/25498/"/>
       <url>/posts/25498/</url>
