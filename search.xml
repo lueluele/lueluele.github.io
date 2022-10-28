@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>HCIP-CloudComputing部署过程避坑指南（持续更新中）</title>
+      <link href="/posts/17657/"/>
+      <url>/posts/17657/</url>
+      
+        <content type="html"><![CDATA[<p>作为一门成熟的认证，云计算应当自己修复自己的bug。</p><h2 id="openstack-部署"><a href="#openstack-部署" class="headerlink" title="openstack 部署"></a>openstack 部署</h2><h3 id="1-基于centos-x2F-rhel部署（暂时放弃，不如直接使用rdo部署）"><a href="#1-基于centos-x2F-rhel部署（暂时放弃，不如直接使用rdo部署）" class="headerlink" title="1.基于centos&#x2F;rhel部署（暂时放弃，不如直接使用rdo部署）"></a><del>1.基于centos&#x2F;rhel部署（暂时放弃，不如直接使用rdo部署）</del></h3><h3 id="2-基于ubuntu部署（destop20-04）"><a href="#2-基于ubuntu部署（destop20-04）" class="headerlink" title="2.基于ubuntu部署（destop20.04）"></a>2.基于ubuntu部署（destop20.04）</h3><ul><li><p>部署过程中会更新系统软件，建议更换国内源。</p></li><li><p>部署过程中需要使用git，需要安装对应的软件</p><p><code>apt  install  git -y</code></p></li><li><p>本地安装需要调整cpu虚拟化，切记</p></li><li><p>云化安装尽量使用按流量计费。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 随笔 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> cloud </tag>
+            
+            <tag> openstack </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>VXLAN工作原理</title>
       <link href="/posts/60853/"/>
       <url>/posts/60853/</url>
