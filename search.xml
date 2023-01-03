@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>linux那些事儿-vim编辑器</title>
+      <link href="/posts/9305/"/>
+      <url>/posts/9305/</url>
+      
+        <content type="html"><![CDATA[<h2 id="关于文本编辑器"><a href="#关于文本编辑器" class="headerlink" title="关于文本编辑器"></a>关于文本编辑器</h2><p>Linux下的文本编辑器有很多，比如图形模式的gedit、kwrite、OpenOffice ……，文本模式下的编辑器有vi、vim（vi的增强版本）……，vi是Linux中默认的编辑器。我们有必要介绍一下vi的用法，以让Linux入门级用户在最短的时间内学会使用它。 而vim作为vi的增强版本，向来有着<del>最好用的IDE</del>之称，这来自于其继承自vi的多样化的编辑体验，以及自身对多种代码的支持。</p><h2 id="vi-编辑器"><a href="#vi-编辑器" class="headerlink" title="vi 编辑器"></a>vi 编辑器</h2><p>为什么要学会简单应用vi？众所周知，linux中一切皆文件，虽然并非所有文件都是用文本编辑器进行read or write，但一般来说，几乎所有的配置文件都需要用到文本编辑器。vi或vim是Linux中最基本的文本编辑工具，vi或vim虽然没有图形界面编辑器那样点鼠标的简单操作，但vi编辑器在系统管理、服务器管理中，永远不是图形界面的编辑器能比的。当你没有安装X-windows桌面环境或桌面环境崩溃时，我们仍需要是用字符模式下的编辑器vi，而在进行纯字符编辑时，vi或vim无疑是一个高效的工具。</p><h2 id="vi-编辑器的使用方法"><a href="#vi-编辑器的使用方法" class="headerlink" title="vi 编辑器的使用方法"></a>vi 编辑器的使用方法</h2><h3 id="如何调用vi"><a href="#如何调用vi" class="headerlink" title="如何调用vi"></a>如何调用vi</h3><p>[root@localhost ~]# vi filename </p><h3 id="vi-常用的的三种模式"><a href="#vi-常用的的三种模式" class="headerlink" title="vi 常用的的三种模式"></a>vi 常用的的三种模式</h3><p>命令模式，用于输入命令； 插入模式，用于编辑文本； 末行模式，用于各种功能的实现。</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flowchart LR</span><br><span class="line">a(vi/vim 文件)--&gt;b(命令模式)</span><br><span class="line">b--aio等键--&gt;c(插入模式)</span><br><span class="line">b--:--&gt;d(末行模式)</span><br><span class="line">c--esc键--&gt;b</span><br><span class="line">d--esc键--&gt;b</span><br></pre></td></tr></table></figure><h3 id="光标移动"><a href="#光标移动" class="headerlink" title="光标移动"></a>光标移动</h3><p>当我们进入vi的命令模式后，我们可以用下面的一些键位来移动光标：</p><p> <strong>k</strong> 向上移动一行        <strong>j</strong> 向下移动一行</p><p> <strong>h</strong> 向左移动一个字符     <strong>l</strong> 向右移动一个字符</p><p><strong>ctrl+b</strong> 向上移动一屏 <strong>ctrl+f</strong> 向下移动一屏</p><p>当然，默认的：向上箭头&#x3D;向上移动，向下箭头&#x3D;向下移动，向左箭头&#x3D;向左移动，向右箭头&#x3D;向右移动。 我们编辑一个文件时，对于 j、k、l和h键，还能在这些动作命令的前面加上数字，比如 3j，表示向下移动3行。</p><h3 id="文本内容的删除、复制和粘贴"><a href="#文本内容的删除、复制和粘贴" class="headerlink" title="文本内容的删除、复制和粘贴"></a>文本内容的删除、复制和粘贴</h3><p>命令模式是vi或vim的默认模式，无论我们处于其它什么模式，都可以通过ESC键切换过来。 当我们按ESC键后，接着再按下特定的按键组合，可以实现某些功能，如删除、复制和粘贴。</p><table><thead><tr><th align="center">按键</th><th>功能</th></tr></thead><tbody><tr><td align="center">x</td><td>删除一个字符</td></tr><tr><td align="center">#x</td><td>删除几个字符，#表示数字，比如3x</td></tr><tr><td align="center">dw</td><td>删除一个单词</td></tr><tr><td align="center">#dw</td><td>删除几个单词，#用数字表示，比如3dw表示删除三个单词</td></tr><tr><td align="center">dd</td><td>删除一行</td></tr><tr><td align="center">#dd</td><td>删除多个行，#代表数字，比如3dd 表示删除光标行及光标的下两行</td></tr><tr><td align="center">d$</td><td>删除光标到行尾的内容</td></tr><tr><td align="center">J</td><td>清除光标所处的行与上一行之间的空格，把光标行和上一行接在一起</td></tr></tbody></table><p>其实删除也带有剪切的意思，当我们删除文字时，可以把光标移动到某处，然后按P^大写^键就把内容贴在光标之前，然后再移动光标到某处，然后再按p^小写^键将内容贴在光标之后。</p><blockquote><p>取决于剪切的内容是整行还是某些字符，在进行粘贴时，也会有所不同，如剪切的是整行，按下p键粘贴时，会在光标行的下方进行粘贴，而如果剪切的是某些字符，则会直接在光标后进行粘贴。</p></blockquote><table><thead><tr><th align="center">按键</th><th>功能</th></tr></thead><tbody><tr><td align="center">yw</td><td>复制一个单词</td></tr><tr><td align="center">y#w</td><td>复制几个单词，#用数字表示，比如y3w表示复制三个单词</td></tr><tr><td align="center">yy</td><td>复制一行</td></tr><tr><td align="center">#yy</td><td>复制多个行，#代表数字，比如3yy 表示复制光标行及光标的下两行</td></tr><tr><td align="center">y$</td><td>复制光标到行尾的内容</td></tr><tr><td align="center">yG</td><td>复制光标到末尾所有行</td></tr></tbody></table><h3 id="插入模式（文本的插入）"><a href="#插入模式（文本的插入）" class="headerlink" title="插入模式（文本的插入）"></a>插入模式（文本的插入）</h3><p>i 在光标之前插入； a 在光标之后插入；</p><p>I 在光标所在行的行首插入； A 在光标所在行的行末插入；</p><p>o 在光标所在的行的下面插入一行； O 在光标所在的行的上面插入一行；</p><p>s 删除光标位置的一个字符，然后进入插入模式； S 删除光标所在的行，然后进入插入模式；</p><h3 id="末行模式下的保存与退出"><a href="#末行模式下的保存与退出" class="headerlink" title="末行模式下的保存与退出"></a>末行模式下的保存与退出</h3><p>作为win下notepad的受害者，很多vi编辑器的初学者经常采用错误的方式退出vi，这很可能使得文件的编辑失去作用。正确的保存与退出，需要输入：号，进入末行模式，并按某些按键实现具体的功能。</p><table><thead><tr><th align="center">按键</th><th>功能</th></tr></thead><tbody><tr><td align="center">:w</td><td>保存</td></tr><tr><td align="center">:w filename</td><td>另存为filename</td></tr><tr><td align="center">:wq!</td><td>保存退出</td></tr><tr><td align="center">wq! filename</td><td>以filename为文件名保存后退出</td></tr><tr><td align="center">q!</td><td>不保存退出</td></tr></tbody></table><h3 id="恢复修改及恢复删除操作"><a href="#恢复修改及恢复删除操作" class="headerlink" title="恢复修改及恢复删除操作"></a>恢复修改及恢复删除操作</h3><p>按ESC键返回命令模式，然后按下u键可以撤消最近的一次修改或删除操作，如果您想撤消多个以前的修改或删除操作，请按多按几次u。这和Word的撤消操作没有太大的区别。</p><h3 id="关于行号"><a href="#关于行号" class="headerlink" title="关于行号"></a>关于行号</h3><p>有时我们配置一个程序运行时，会出现配置文件X行出现错误 。这时我们要用到行号相关的操作，按下ESC键回到命令模式，然后输入<code>:set nu</code>即可设置显示行号，再次按下<code>:set nonu</code>取消行号显示，并且可按下#G快速跳转第#行。</p><h3 id="查找和替换功能"><a href="#查找和替换功能" class="headerlink" title="查找和替换功能"></a>查找和替换功能</h3><p><strong>查找</strong></p><p>首先，我们要进入ESC键，进入命令模式，我们输入&#x2F;或?就进入查找模式了。</p><p><code>/word</code> 注：正向查找word，按n键，把光标移动到下一个符合条件的地方，按N键，把光标移动到上一个符合条件的地方。</p><p><code>?word</code> 注：反向查找word，按n键，把光标移动到下一个符合条件的地方，按N键，把光标移动到上一个符合条件的地方。</p><p><strong>替换</strong></p><p>按ESC键进入命令模式。</p><p>按下<code>:s /old/new</code> 注：把当前光标所处的行中的第一个old单词，替换成new</p><p><code>:s /old/new/g</code> 注：把当前光标所处的行中的old单词，替换成new，并把所有old高亮显示；</p><p><code>:%s /old/new</code> 注：把文档中所有行的第一个old替换成new；</p><p><code>:%s /old/newg</code> 注：把文档中所有的old替换成new；</p><p><code>:#,# s /old/new/g</code> 注：＃号表示数字，表示从多少行到多少行，把old替换成new。 </p><blockquote><p>在这之中，g表示全局查找。</p></blockquote><p>举例说明： 比如我们有一篇文档要修改，我们把光标所在的行，把所有单词the，替换成THE，应该是 <code>:s /the/THE/g</code> 我们把整篇文档的所有的the都替换成THE，应该是 <code>:%s /the/THE/g</code>我们仅仅是把第1行到第10行中的the，替换成THE，应该是 <code>:1,10 s /the/THE/g</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> share </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HCIP-CloudComputing部署过程避坑指南（持续更新中）</title>
       <link href="/posts/17657/"/>
       <url>/posts/17657/</url>
