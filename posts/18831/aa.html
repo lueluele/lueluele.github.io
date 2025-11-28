@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试打人效果</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            overflow: hidden; /* 隐藏滚动条 */
+            background-color: #111; /* 页面背景色 */
+            height: 100vh;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        /* 弹窗基础样式：缩小尺寸，强制文字不换行相关样式 */
+        .popup {
+            position: absolute;
+            background: linear-gradient(135deg, var(--popup-color), #fff); /* 渐变背景 */
+            border-radius: 6px; /* 同步缩小圆角 */
+            padding: 10px; /* 缩小内边距 */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); /* 缩小阴影 */
+            border: 2px solid #fff;
+            transition: all 0.3s ease;
+            z-index: 10;
+            overflow: hidden;
+            /* 强制文字不换行的核心：容器宽度固定，内容不换行 */
+            white-space: nowrap; /* 容器内所有文字不换行 */
+        }
+        /* 弹窗标题样式：缩小字体，强制不换行 */
+        .popup-title {
+            font-size: 14px; /* 缩小标题字体 */
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px; /* 缩小间距 */
+            white-space: nowrap; /* 强制标题不换行 */
+            overflow: hidden; /* 超出隐藏（配合省略号） */
+            text-overflow: ellipsis; /* 超出显示省略号 */
+            display: block; /* 确保单行显示 */
+        }
+        /* 弹窗内容样式：缩小字体，强制不换行 */
+        .popup-content {
+            font-size: 30px; /* 缩小内容字体 */
+            color: #666;
+            line-height: 1.3; /* 调整行高 */
+            white-space: nowrap; /* 强制内容不换行 */
+            overflow: hidden; /* 超出隐藏（配合省略号） */
+            text-overflow: ellipsis; /* 超出显示省略号 */
+            display: block; /* 确保单行显示 */
+        }
+        /* 弹窗关闭按钮：缩小尺寸 */
+        .popup-close {
+            position: absolute;
+            top: 3px; /* 调整位置 */
+            right: 5px; /* 调整位置 */
+            font-size: 16px; /* 缩小关闭按钮字体 */
+            color: #999;
+            cursor: pointer;
+            width: 18px; /* 缩小按钮尺寸 */
+            height: 18px; /* 缩小按钮尺寸 */
+            line-height: 18px; /* 居中对齐 */
+            text-align: center;
+            border-radius: 50%;
+            transition: background 0.2s;
+            z-index: 11; /* 确保关闭按钮在最上层 */
+        }
+        .popup-close:hover {
+            background: #eee;
+            color: #333;
+        }
+        /* 弹窗hover效果：微调缩放 */
+        .popup:hover {
+            transform: scale(1.03); /* 缩小hover缩放比例 */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 配置项：关闭拖拽、缩小弹窗尺寸、取消自动关闭
+        const config = {
+            titles: ['', '', '', '', '', ''], // 弹窗标题
+            contents: [
+                '记得好好吃饭', '别感冒', '多喝热水', '傻逼', 
+                '展翅', '卖萌', '前端特效实现', 'HTML+CSS+JS'
+            ], // 弹窗内容
+            colors: ['#ff9a9e', '#fad0c4', '#fbc2eb', '#a6c1ee', '#84fab0', '#8fd3f4'], // 弹窗渐变主色
+            sizes: [ // 【修改】缩小弹窗尺寸范围（宽, 高）
+                [300, 60], [100, 60], [200, 60], [150, 60], [180, 60], [120, 60], [220, 60], [250, 60]
+            ],
+            spawnInterval: 300, // 每300毫秒生成一个新弹窗
+            maxPopupCount: 100, // 最大弹窗数量100
+            dragEnabled: false // 【修改】关闭弹窗拖拽功能
+        };
+
+        let popupCount = 0; // 当前屏幕弹窗数量
+
+        // 生成随机数：区间 [min, max)
+        function getRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // 生成随机整数：区间 [min, max]
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // 创建单个弹窗
+        function createPopup() {
+            // 限制最大弹窗数量
+            if (popupCount >= config.maxPopupCount) return;
+
+            // 随机选择配置项
+            const randomTitle = config.titles[getRandomInt(0, config.titles.length - 1)];
+            const randomContent = config.contents[getRandomInt(0, config.contents.length - 1)];
+            const randomColor = config.colors[getRandomInt(0, config.colors.length - 1)];
+            const randomSize = config.sizes[getRandomInt(0, config.sizes.length - 1)];
+            const [width, height] = randomSize;
+
+            // 创建弹窗容器
+            const popup = document.createElement('div');
+            popup.className = 'popup';
+            popup.style.setProperty('--popup-color', randomColor); // 设置自定义颜色变量
+            popup.style.width = `${width}px`;
+            popup.style.height = `${height}px`;
+
+            // 随机位置：确保弹窗不超出屏幕
+            const maxX = window.innerWidth - width - 20;
+            const maxY = window.innerHeight - height - 20;
+            const randomX = getRandomInt(20, maxX > 20 ? maxX : 20);
+            const randomY = getRandomInt(20, maxY > 20 ? maxY : 20);
+            popup.style.left = `${randomX}px`;
+            popup.style.top = `${randomY}px`;
+
+            // 弹窗内部结构：标题 + 内容 + 关闭按钮
+            popup.innerHTML = `
+                <div class="popup-close">×</div>
+                <div class="popup-title">${randomTitle}</div>
+                <div class="popup-content">${randomContent}</div>
+            `;
+
+            // 添加到页面
+            document.body.appendChild(popup);
+            popupCount++;
+
+            // 【修改】删除自动关闭定时器，取消自动关闭功能
+
+            // 关闭按钮点击事件
+            const closeBtn = popup.querySelector('.popup-close');
+            closeBtn.addEventListener('click', () => {
+                removePopup(popup); // 仅保留手动关闭
+            });
+
+            // 【修改】拖拽功能已通过配置关闭，此处无需执行
+        }
+
+        // 移除弹窗
+        function removePopup(popup) {
+            if (popup && popup.parentElement) {
+                // 淡出动画后移除
+                popup.style.opacity = '0';
+                popup.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    document.body.removeChild(popup);
+                    popupCount--;
+                }, 300);
+            }
+        }
+
+        // 【修改】删除拖拽功能函数 initDrag，无需保留
+
+        // 窗口大小适配：重新计算弹窗位置，避免超出屏幕
+        window.addEventListener('resize', () => {
+            const popups = document.querySelectorAll('.popup');
+            popups.forEach(popup => {
+                const width = parseInt(popup.style.width);
+                const height = parseInt(popup.style.height);
+                const maxX = window.innerWidth - width - 20;
+                const maxY = window.innerHeight - height - 20;
+
+                let currentX = parseInt(popup.style.left);
+                let currentY = parseInt(popup.style.top);
+
+                if (currentX > maxX) popup.style.left = `${maxX}px`;
+                if (currentY > maxY) popup.style.top = `${maxY}px`;
+                if (currentX < 20) popup.style.left = '20px';
+                if (currentY < 20) popup.style.top = '20px';
+            });
+        });
+
+        // 定时生成新弹窗
+        setInterval(createPopup, config.spawnInterval);
+
+        // 初始生成一批弹窗
+        for (let i = 0; i < 20; i++) { // 初始弹窗数量20
+            setTimeout(createPopup, i * 100); // 错开时间100毫秒
+        }
+    </script>
+</body>
+</html>
